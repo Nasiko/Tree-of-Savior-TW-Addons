@@ -1,4 +1,4 @@
--- nsWorldMapTooltip v0.1.0 By Nasiko
+-- nsWorldMapTooltip v1.0.0 By Nasiko
 -- Refer: @TreeOfSaviorTW/data/ui.ipf/uiscp/tooltip_worldmap.lua 世界地圖的提示
 
 local isLoaded = false;
@@ -11,6 +11,50 @@ local function SetupHook(newFunction, hookedFunctionName)
 	else
 		_G[hookedFunctionName] = newFunction;
 	end
+end
+
+local function NS_SCR_GET_ZONE_FACTION_OBJECT(zoneClassName, factionList, monRankList, respawnTime)
+    local zoneGentype = 'GenType_'..zoneClassName;
+    local classCount = GetClassCount(zoneGentype);
+    local factionList = SCR_STRING_CUT(factionList);
+    local monRankList = SCR_STRING_CUT(monRankList);
+    local i;
+    local monList = {};
+    for i = 0 , classCount -1 do
+        local gentypeIES = GetClassByIndex(zoneGentype, i);
+        if gentypeIES ~= nil and table.find(factionList, gentypeIES.Faction) > 0 and gentypeIES.MaxPop > 0 then
+            if respawnTime == nil or gentypeIES.RespawnTime <= respawnTime then
+                local monIES = GetClass('Monster', gentypeIES.ClassType);
+                if monIES ~= nil then
+                    local rankFlag = 'YES';
+                    if #monRankList > 0 and GetPropType(monIES,'MonRank') ~= nil and table.find(monRankList,monIES.MonRank) == 0 then
+                        rankFlag = 'NO';
+                    end
+                    if rankFlag == 'YES' then
+                        local flag = false;
+                        if #monList > 0 then
+                            for j = 1, #monList do
+                                if monList[j][1] == gentypeIES.ClassType then
+                                    monList[j][2] = monList[j][2] + gentypeIES.MaxPop;
+                                    flag = true;
+                                    break
+                                end
+                            end
+                        end
+                        if flag == false then
+                            monList[#monList + 1] = {};
+                            monList[#monList][1] = gentypeIES.ClassType;
+                            monList[#monList][2] = gentypeIES.MaxPop;
+                            monList[#monList][3] = monIES.MonRank;
+                            monList[#monList][4] = monIES.Level;-- + gentypeIES.Lv;
+                        end
+                    end
+                end
+            end
+        end
+    end
+    
+    return monList
 end
 
 function WORLDMAP_TOOLTIP_POSSIBLE_QUESTLIST_HOOKED(frame, mapName, numarg, ctrlSet, drawCls)
@@ -56,12 +100,14 @@ function WORLDMAP_TOOLTIP_POSSIBLE_QUESTLIST_HOOKED(frame, mapName, numarg, ctrl
     	end
     end
 	
-	local MonList = SCR_GET_ZONE_FACTION_OBJECT(drawCls.ClassName, "Monster", "Normal/Special/Elite/Boss", 120000);
+	-- 一般/特殊/菁英/BOSS
+	local MonList = NS_SCR_GET_ZONE_FACTION_OBJECT(drawCls.ClassName, "Monster", "Normal/Special/Elite/Boss", 120000);
 
 	for key, value in pairs(MonList) do
 		local MonClassType = value[1];
 		local MonMaxPop = value[2];
 		local MonRank = value[3];
+		local MonLv = value[4];
 		
 		local monCls = GetClass("Monster", MonClassType);
 		
@@ -71,15 +117,15 @@ function WORLDMAP_TOOLTIP_POSSIBLE_QUESTLIST_HOOKED(frame, mapName, numarg, ctrl
         picture:SetEnableStretch(1);
 		local questListBox = ctrlSet:CreateControl('richtext', "questListBox"..viewCount, subX + 20, subY + (viewCount - 1)*20, 20, 100);
 		if MonRank == "Boss" then
-			questListBox:SetText('{@st70_s}{#FF9797}[BOSS]' .. monCls.Name .. "(" .. MonMaxPop .. ")");
+			questListBox:SetText('{@st70_s}{#FF2D2D}[BOSS]Lv.' .. MonLv .. " " .. monCls.Name .. "(" .. MonMaxPop .. ")");
 		elseif  MonRank == "Special" then
-			questListBox:SetText('{@st70_s}{#ACD6FF}[特殊]' .. monCls.Name .. "(" .. MonMaxPop .. ")");
+			questListBox:SetText('{@st70_s}{#2894FF}[特殊]Lv.' .. MonLv .. " " .. monCls.Name .. "(" .. MonMaxPop .. ")");
 		elseif  MonRank == "Elite" then
-			questListBox:SetText('{@st70_s}{#FF8000}[菁英]' .. monCls.Name .. "(" .. MonMaxPop .. ")");
+			questListBox:SetText('{@st70_s}{#FF8000}[菁英]Lv.' .. MonLv .. " " .. monCls.Name .. "(" .. MonMaxPop .. ")");
 		else
-			questListBox:SetText('{@st70_s}{#FFFFFF}[一般]' .. monCls.Name .. "(" .. MonMaxPop .. ")");
+			questListBox:SetText('{@st70_s}{#FFFFFF}[一般]Lv.' .. MonLv .. " " .. monCls.Name .. "(" .. MonMaxPop .. ")");
 		end
-		viewCount = viewCount + 1
+		viewCount = viewCount + 1;
 	end
 end
 
