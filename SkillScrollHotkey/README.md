@@ -1,1 +1,1 @@
-#SkillScrollHotkey
+# Skill Scroll Hotkey
