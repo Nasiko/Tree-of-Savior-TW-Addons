@@ -1,6 +1,7 @@
--- nsSkillScrollIcon v1.0.0 By Nasiko
+-- SkillScrollHotkey v0.9.0 By Nasiko
 -- Refer: @TreeOfSaviorTW/data/addon.ipf/quickslotnexpbar/quickslotnexpbar.lua 快捷設定
 -- 技能卷軸放到快捷鍵時會自動顯示技能的圖示
+-- 目前bug 卷軸小圖示會殘留
 
 local isLoaded = false;
 
@@ -19,6 +20,23 @@ function SET_QUICK_SLOT_HOOKED(slot, category, type, iesID, makeLog, sendSavePac
     local icon 	= CreateIcon(slot);
 	local imageName = "";
 
+	--CHAT_SYSTEM(slot:GetName());
+	--CHAT_SYSTEM(slot:GetTopParentFrame():GetName());
+	
+	local frame = slot:GetTopParentFrame();
+	local oldSubSlot = GET_CHILD_RECURSIVELY(frame, "sub"..slot:GetName(), "ui::CSlot");
+
+	if oldSubSlot ~= nil then
+		--CHAT_SYSTEM(oldSubSlot:GetName());
+		local oldIcon = oldSubSlot:GetIcon();
+		if oldIcon ~= nil then
+			local oldIconInfo = oldIcon:GetInfo();
+			if oldIconInfo.imageName == "None" then
+				oldIcon = nil;
+			end
+		end
+	end	
+	
 	if category == 'Action' then
 		icon:SetColorTone("FFFFFFFF");
 		icon:ClearText();
@@ -69,11 +87,7 @@ function SET_QUICK_SLOT_HOOKED(slot, category, type, iesID, makeLog, sendSavePac
 
 				if itemIES.MaxStack > 0 or itemIES.GroupName == "Material" then
 					if itemIES.MaxStack > 1 then -- 개수는 스택형 아이템만 표시해주자
-						if skill_scroll == type then
-							icon:SetText("卷"..invenItemInfo.count, 'quickiconfont', 'right', 'bottom', -2, 1);
-						else
-							icon:SetText(invenItemInfo.count, 'quickiconfont', 'right', 'bottom', -2, 1);
-						end
+						icon:SetText(invenItemInfo.count, 'quickiconfont', 'right', 'bottom', -2, 1);
 					else
 					  icon:SetText(nil, 'quickiconfont', 'right', 'bottom', -2, 1);
 					end
@@ -87,8 +101,19 @@ function SET_QUICK_SLOT_HOOKED(slot, category, type, iesID, makeLog, sendSavePac
 				if skill_scroll == type then
 					--CHAT_SYSTEM("IS_SCROLL YES");
 					--CHAT_SYSTEM("SkillType:"..itemIES.SkillType);
-					--直接換成技能圖示
+			
+					local subslot = slot:CreateOrGetControl("slot","sub"..slot:GetName(),25,0,20,20);
+					tolua.cast(subslot, 'ui::CSlot');
+					subslot:EnableDrag(0);
+					subslot:EnablePop(0);
+					subslot:SetEventScript(ui.RBUTTONUP, 'SKILLSCROLLICON_RBTN_FUNC');
+					subslot:SetEventScriptArgNumber(ui.RBUTTONUP, slot:GetSlotIndex());
+					local subIcon = CreateIcon(subslot);
+					subIcon:SetImage(imageName);
+
+					--換成技能圖示					
 					imageName = 'icon_' .. GetClassString('Skill', itemIES.SkillType, 'Icon');
+					
 					icon:SetUserValue("IS_SCROLL","YES");
 				else
 					icon:SetUserValue("IS_SCROLL","NO");
