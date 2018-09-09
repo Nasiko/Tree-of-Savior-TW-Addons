@@ -1,1 +1,1 @@
-#S
+#SkillScrollHotkey
