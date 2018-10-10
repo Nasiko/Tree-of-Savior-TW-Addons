@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uiframe name="dpscount" x="0" y="0" width="600" height="120">
+	<frame fasthide="true" layout_gravity="left top"/>
+	<input hittest="true" movable="true" moveintitlebar="false" hittestframe="true"/>
+	<layer layerlevel="20"/>
+    <draw drawtitlebarframe="false" drawtitlebar="false"/>
+    <option closebutton="false" hideable="false"/>
+    <skin frameskin="chat_window" titlebarskin="none"/>
+	<controls/>
+</uiframe>
