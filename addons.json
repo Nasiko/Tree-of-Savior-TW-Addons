@@ -1,0 +1,12 @@
+[
+	{
+		"name" : "DPS Count",
+		"file" : " dpscount",
+		"extension" : "ipf",
+		"fileVersion" : "v0.1.1",
+		"releaseTag" : "dpscount",
+		"unicode" : "⛇",
+		"description" : "Damage per second Count 每秒傷害輸出統計插件",
+		"tags" : ["combat","dps"]
+	}
+]
