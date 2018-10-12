@@ -2,7 +2,7 @@
     Hello! I am from Tree of Savior Taiwan.
 ***
 ## DPS Count
-    v0.1.1 Beta By Nasiko 2018.10.10
+    +v0.1.1 Beta By Nasiko 2018.10.10
 
 ![alt text](https://i.imgur.com/Ih0oFoj.png)
 
