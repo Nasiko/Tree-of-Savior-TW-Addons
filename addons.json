@@ -3,7 +3,7 @@
 		"name" : "DPS Count",
 		"file" : " dpscount",
 		"extension" : "ipf",
-		"fileVersion" : "v0.1.1",
+		"fileVersion" : "v1.0.0",
 		"releaseTag" : "dpscount",
 		"unicode" : "⛄",
 		"description" : "Damage per second Count",
