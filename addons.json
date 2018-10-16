@@ -6,7 +6,7 @@
 		"fileVersion" : "v0.1.1",
 		"releaseTag" : "dpscount",
 		"unicode" : "⛄",
-		"description" : "Damage per second Count \n 每秒傷害統計插件 \n Beta Version",
+		"description" : "Damage per second Count Beta Version \n 每秒傷害統計插件 Beta版 \n",
 		"tags" : [
 			"combat",
 			"dps"
