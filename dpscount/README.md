@@ -1,5 +1,6 @@
 ## DPS Count
-`v0.1.1 Beta By Nasiko 2018.10.10`
+`v0.1.1 Beta By Nasiko 2018.10.10` 
+
 `v0.2.0 Beta By Nasiko 2018.10.18`
 * bug fix
 * Auto Save Window Locations
