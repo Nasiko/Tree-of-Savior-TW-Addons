@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uiframe name="dpscount" x="0" y="0" width="400" height="60">
-	<frame fasthide="true" layout_gravity="left top"/>
-	<input hittest="true" movable="true" moveintitlebar="false" hittestframe="true"/>
-	<layer layerlevel="20"/>
+<uiframe name="dpscount" x="300" y="200" width="400" height="60">
+	<frame title="DPS Count" fasthide="true" layout_gravity="left top"/>
+	<input moveable="true" hittestframe="true" moveintitlebar="false" hittest="true"/>
+	<layer layerlevel="31"/>
     <draw drawtitlebarframe="false" drawtitlebar="false"/>
-    <option closebutton="false" hideable="false"/>
     <skin frameskin="chat_window" titlebarskin="none"/>
+	<option visible="true" alwaysVisible="true" closebutton="false" hideable="false" autoopen="true"/>
 	<controls/>
 </uiframe>
