@@ -1,5 +1,6 @@
 local addonName = "DpsCount";
-local verText = "0.1.1";
+local verText = "0.2.0";
+local verSettings = 1;
 local autherName = "NASIKO";
 local addonNameLower = string.lower(addonName);
 local SettingFileName = "setting.json";
@@ -10,7 +11,10 @@ _G['ADDONS'][autherName][addonName] = _G['ADDONS'][autherName][addonName] or {};
 
 local Me = _G['ADDONS'][autherName][addonName];
 
-Me.isLoaded = false;
+Me.Loaded = false;
+Me.DebugMode = false;
+Me.SettingFilePathName = string.format("../addons/%s/%s", addonNameLower, SettingFileName);
+
 Me.HoockedOrigProc = Me.HoockedOrigProc or {};
 Me.GroupBoxName = "chatgbox_TOTAL"; -- 擷取所有訊息
 Me.Index = 0; -- 訊息游標
@@ -19,6 +23,58 @@ Me.TotalDamage = 0; --總傷害
 Me.StartTime = Me.StartTime or nil; -- 統計起始時間(秒數)
 Me.LastTime = Me.LastTime or nil; -- 最後更新時間(秒數)
 Me.ResetSecond = 60; -- 最大閒置時間(秒數)
+
+local acutil = require('acutil');
+
+Me.Settings = {
+	-- 版本(存檔格式的版本)
+	version = verSettings,
+	-- 是否顯示
+	show = 1,
+	-- Normal = 正常, Min = 縮小
+	size = "Normal",
+	-- 最大閒置秒數
+	resetSecond = 60,
+	-- 視窗位置x座標
+	xPos = 300,
+	-- 視窗位置y座標
+	yPos = 400,
+	-- 是否運行
+	enabled = 1
+};
+
+local Nasiko = {
+	Log = function(self, Message, Mode) 
+		
+		if Message == nil then return end
+		if Mode == nil and (not Me.DebugMode) then return end
+
+		local header = "";
+		if Mode == nil then 
+			header = string.format("[Debug][%s]", addonName); 
+		else
+			header = string.format("[%s][%s]", Mode, addonName); 
+		end
+		
+		CHAT_SYSTEM(header..Message);
+	end
+};
+
+local function LoadSetting()
+	local resultObj, resultError = acutil.loadJSON(Me.SettingFilePathName);
+	if resultError then
+		acutil.saveJSON(Me.SettingFilePathName, Me.Settings);
+		Nasiko:Log('Default settings loaded.', 'info');
+	else
+		if resultObj.version ~= nil and resultObj.version == verSettings then 
+			Me.Settings = resultObj;
+			Nasiko:Log('Settings loaded!', 'info');
+		else
+			acutil.saveJSON(Me.SettingFilePathName, Me.Settings);
+			Nasiko:Log('Settings Version Update!!', 'info');
+		end
+	end
+end
 
 local function comma_value(amount)
   local formatted = amount
@@ -63,29 +119,39 @@ local function GetTimeText(value, length)
 end
 
 function DPSCOUNT_ON_INIT(addon, frame)
-	frame:ShowWindow(1);
-	frame:ShowTitleBar(1);
-    frame:ShowTitleBarFrame(1);
-	frame:SetPos(300, 200);
+	Me.frame = frame;
 	
-	local text = frame:CreateOrGetControl("richtext", "DPSCOUNT_ON_TITLE", 10, 10, 120, 20);
-	tolua.cast(text, 'ui::CRichText');
-	text:SetText("{@st48}{s16}DPS Count");
-	text:SetGravity(ui.LEFT, ui.TOP);
-					
-	addon:RegisterMsg('GAME_START', 'NASIKO_ON_GAME_START');
+	frame:SetEventScript(ui.LBUTTONUP, "NASIKO_DPSCOUNT_END_DRAG");
+	
+	addon:RegisterMsg('GAME_START_3SEC', 'NASIKO_DPSCOUNT_ON_GAME_START_3SEC');
 	addon:RegisterMsg('FPS_UPDATE', 'NASIKO_DPSCOUNT_ON_MSG');
-	
-	if not Me.isLoaded  then
-		Me.isLoaded  = true;
-	end
 end
 
-function NASIKO_ON_GAME_START()
+function NASIKO_DPSCOUNT_END_DRAG(addon, frame)
+	Me.Settings.xPos = Me.frame:GetX();
+	Me.Settings.yPos = Me.frame:GetY();
+	acutil.saveJSON(Me.SettingFilePathName, Me.Settings);
+end
+
+function NASIKO_DPSCOUNT_ON_GAME_START_3SEC()
+	
+	if not Me.Loaded then
+		Me.Loaded = true;
+		LoadSetting();
+	end
+	
 	Me.IsCount = false;
 	Me.TotalDamage = 0;
 	Me.StartTime = nil;
 	Me.LastTime = nil;
+
+	Me.frame:ShowWindow(Me.Settings.show);
+	Me.frame:SetPos(Me.Settings.xPos, Me.Settings.yPos);
+	
+	local text = Me.frame:CreateOrGetControl("richtext", "DPSCOUNT_ON_TITLE", 10, 10, 120, 20);
+	tolua.cast(text, 'ui::CRichText');
+	text:SetText("{@st48}{s16}DPS Count");
+	text:SetGravity(ui.LEFT, ui.TOP);
 end
 
 --chatgbox_TOTAL
@@ -114,6 +180,7 @@ function NASIKO_DPSCOUNT_ON_MSG(frame, msg, argStr, argNum)
 			
 			if isGiveDamage ~= nil then
 				tempMsg = string.sub(tempMsg, 1);
+				local damage = nil;
 				local amountIndex = string.find(tempMsg, "$AMOUNT");
 				--CHAT_SYSTEM(amountIndex);
 				
@@ -121,13 +188,18 @@ function NASIKO_DPSCOUNT_ON_MSG(frame, msg, argStr, argNum)
 				local endIndex = string.find(tempMsg, "#@!") - 1;
 				--CHAT_SYSTEM(string.format("start: %s end: %s", startIndex, endIndex));
 				
-				local damage = string.gsub(string.sub(tempMsg, startIndex, endIndex), '%p', '');
+				if startIndex <= endIndex then
+					damage = string.sub(tempMsg, startIndex, endIndex);
+				end
 				
 				if damage ~= nil then
 				
+					damage = string.gsub(damage, '%p', '');
 					--CHAT_SYSTEM(damage);
 					
 					local d = tonumber(damage);
+					
+					if d == nil then d = 0 end;
 					
 					--CHAT_SYSTEM(d);
 					
