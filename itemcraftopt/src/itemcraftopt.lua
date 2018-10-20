@@ -1,5 +1,5 @@
--- nsItemCraft v1.0.0 By Nasiko
--- https://github.com/Nasiko/Tree-of-Savior-TW-Addons/tree/master/addons/nsitemcraft
+-- ItemCraft Optimization v1.0.0 By Nasiko
+-- https://github.com/Nasiko/Tree-of-Savior-TW-Addons/itemcraftopt
 -- Refer: @TreeOfSaviorTW/data/ui.ipf/uiscp/lib_slot.lua 快捷鍵觸發
 -- Refer: @TreeOfSaviorTW/data/addon.ipf/itemcraft/itemCraft.lua 物品製作
 -- Refer: @TreeOfSaviorTW/data/ui.ipf/uixml/controlset.xml UI設定檔
@@ -39,7 +39,7 @@ function SET_ITEM_CRAFT_UINAME_HOOKED(uiName)
 
 end
 
-function NSITEMCRAFT_ON_INIT(addon, frame)
+function ITEMCRAFTOPT_ON_INIT(addon, frame)
 	if not isLoaded then
 		-- 複寫 itemCraft.lua 的 SET_ITEM_CRAFT_UINAME 方法
 		SetupHook(SET_ITEM_CRAFT_UINAME_HOOKED, "SET_ITEM_CRAFT_UINAME");
