@@ -1,6 +1,6 @@
 # Tree-of-Savior-TW-Addons
     Hello! I am from Tree of Savior Taiwan.
-***
+## Contents
 * [DPS Count](#dps-count)
 * [Item Craft Optimization](#item-craft-optimization)
 ***
