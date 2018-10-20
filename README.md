@@ -1,7 +1,7 @@
 # Tree-of-Savior-TW-Addons
     Hello! I am from Tree of Savior Taiwan.
 ***
-## DPS Count
+### DPS Count
 `v0.1.1 Beta By Nasiko 2018.10.10` 
 * Initial public
 
@@ -23,7 +23,7 @@
 
 ![alt text](https://i.imgur.com/rAgGaOx.png)
 
-## Item Craft Optimization
+### Item Craft Optimization
 優化使用技能製作道具介面，可以直接點擊材料製作。
 
 **Fletcher Of Craft Arrow**
