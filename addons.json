@@ -11,5 +11,20 @@
 			"combat",
 			"dps"
 		]
+	},
+	{
+		"name" : " Item Craft Optimization",
+		"file" : "itemcraftopt",
+		"extension" : "ipf",
+		"fileVersion" : "v1.0.0",
+		"releaseTag" : "itemcraftopt",
+		"unicode" : "⛄",
+		"description" : "Item Craft Optimization With Fletcher Of Craft Arrow And Alchemist Of Tincturing \n 造箭者的製作箭矢與鍊金術士的製作藥劑，進行物品製作介面優化 \n",
+		"tags" : [
+			"item",
+			"craft",
+			"fletcher",
+			"alchemist"
+		]
 	}
 ]
