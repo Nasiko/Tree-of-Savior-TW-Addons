@@ -1,5 +1,5 @@
 -- ItemCraft Optimization v1.0.0 By Nasiko
--- https://github.com/Nasiko/Tree-of-Savior-TW-Addons/itemcraftopt
+-- -- https://github.com/Nasiko/Tree-of-Savior-TW-Addons/tree/master/itemcraftopt
 -- Refer: @TreeOfSaviorTW/data/ui.ipf/uiscp/lib_slot.lua 快捷鍵觸發
 -- Refer: @TreeOfSaviorTW/data/addon.ipf/itemcraft/itemCraft.lua 物品製作
 -- Refer: @TreeOfSaviorTW/data/ui.ipf/uixml/controlset.xml UI設定檔
