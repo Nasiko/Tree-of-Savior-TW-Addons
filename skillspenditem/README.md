@@ -1,6 +1,6 @@
-## Skill Spend Item
+# Skill Spend Item
 
-# Command
+## Command
 
 /spend itemcraft on
 
