@@ -3,6 +3,7 @@
 ## Contents
 * [DPS Count](#dps-count)
 * [Item Craft Optimization](#item-craft-optimization)
+* [Skill Spend Item](#skill-spend-item)
 ***
 # DPS Count
 `v0.1.1 Beta By Nasiko 2018.10.10` 
@@ -41,3 +42,20 @@
 
 ![Item Craft screenshot](http://i.imgur.com/hhqFla0.png)
 
+# Skill Spend Item
+
+## Command
+
+/spend itemcraft on
+
+Display itemcraft list.
+
+![Skill Spend Item screenshot](https://i.imgur.com/Hz9e6xS.png)
+![Skill Spend Item screenshot](https://i.imgur.com/MPC2UZO.png)
+
+/spend itemcraft off
+
+Hide itemcraft list.
+
+![Skill Spend Item screenshot](https://i.imgur.com/mZOxx8F.png)
+![Skill Spend Item screenshot](https://i.imgur.com/XGc1lIg.png)
