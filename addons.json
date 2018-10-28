@@ -31,13 +31,14 @@
 		"name" : "Skill Spend Item",
 		"file" : "skillspenditem",
 		"extension" : "ipf",
-		"fileVersion" : "v1.0.0",
+		"fileVersion" : "v1.0.1",
 		"releaseTag" : "skillspenditem",
 		"unicode" : "⛄",
-		"description" : "Display Skill Spend Item Remaining Count. 顯示技能所需要的物品剩餘數量。",
+		"description" : "The remaining number of items required to the skill. 顯示技能所需要的物品剩餘數量。",
 		"tags" : [
 			"skill",
-			"spenditem"
+			"spenditem",
+			"ui"
 		]
 	}
 ]
