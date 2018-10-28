@@ -1,5 +1,7 @@
 # Skill Spend Item
 
+The remaining number of items required to the skill
+
 ## Command
 
 /spend itemcraft on
