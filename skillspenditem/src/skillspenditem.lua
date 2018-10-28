@@ -1,5 +1,5 @@
 local addonName = "SkillSpendItem";
-local verText = "1.0.0";
+local verText = "1.0.1";
 local verSettings = 1;
 local autherName = "NASIKO";
 local addonNameLower = string.lower(addonName);
@@ -40,6 +40,10 @@ Me.ItemCraftList[1011][1].Items[6] = { ClassName = "food_033", Cnt = 0 }; -- 麵
 Me.ItemCraftList[1011][1].Items[7] = { ClassName = "food_040", Cnt = 0 }; -- 蔥
 
 -- 鍊金(Alchemist)
+Me.SkillList[2005] = {};
+Me.SkillList[2005][21003] = { ClassName = "Alchemist_Roasting", SpendItem = "misc_catalyst_1"}; -- 寶石烘培
+Me.SkillList[2005][21007] = { ClassName = "Alchemist_ItemAwakening", SpendItem = "misc_wakepowder"}; -- 道具覺醒
+
 Me.ItemCraftList[2005] = {};
 Me.ItemCraftList[2005][1] = { TargetItem = "Drug_Alche_HP",	Items = {}, Cnt = 5 };
 Me.ItemCraftList[2005][1].Items[1] = { ClassName = "misc_flask", Cnt = 1 };
@@ -77,6 +81,10 @@ Me.ItemCraftList[3011][5].Items[2] = { ClassName = "misc_gunpowder", Cnt = 10 };
 Me.ItemCraftList[3011][6] = { TargetItem = "arrow_06",	Items = {}, Cnt = 100 };
 Me.ItemCraftList[3011][6].Items[1] = { ClassName = "wood_02", Cnt = 20 };
 Me.ItemCraftList[3011][6].Items[2] = { ClassName = "misc_0116", Cnt = 10 };
+
+-- 鑑定師(Appraiser)
+Me.SkillList[3013] = {};
+Me.SkillList[3013][31501] = { ClassName = "Appraiser_Apprise", SpendItem = "misc_0507"}; -- 鑑定
 
 -- 寬恕(Pardoner)
 Me.ItemCraftList[4010] = {};
@@ -181,9 +189,9 @@ function Me.GetSkillSpendItem()
 						end
 					end
 					
-					if jobID == 1011 then
-						if Me.SkillList[1011][objSkill.ClassID] then
-							local SpendItemInfo = GetClass("Item", Me.SkillList[1011][objSkill.ClassID].SpendItem);
+					if Me.SkillList[jobID] then
+						if Me.SkillList[jobID][objSkill.ClassID] then
+							local SpendItemInfo = GetClass("Item", Me.SkillList[jobID][objSkill.ClassID].SpendItem);
 							if SpendItemInfo ~= nil then
 							if Me.SpendItemTable[SpendItemInfo.ClassID] == nil then
 								--Nasiko:Log(string.format("SkillName:%s, SpendItem:%s[%s]", objSkill.Name, SpendItemInfo.Name, SpendItemInfo.ClassID));
@@ -255,12 +263,11 @@ end
 function Me.InitialFrame()
 	local w = 50;
 	local h = 50;
-	local padding = 5;
-	local margin = 5;
+	local padding = 10;
 	local cnt = 0;
 	
-	local soltWitch = w - 5;
-	local soltHeight = h - 5;
+	local soltWitch = w - 4;
+	local soltHeight = h - 4;
 	local fontsize = 16;
 	local maxColumn = 8;
 	local rowCnt = 1;
@@ -272,12 +279,14 @@ function Me.InitialFrame()
 	
 	if rowCnt > 1 then
 		maxColumn = math.ceil(Me.SpendItemCount / rowCnt);
+	else
+		maxColumn = Me.SpendItemCount;
 	end
 	
 	-- Clear 
 	Me.frame:RemoveAllChild();
 	
-	Me.frame:Resize((w * maxColumn + padding + margin), (h * rowCnt + padding + margin));
+	Me.frame:Resize((w * maxColumn + padding * 2 - 4), (h * rowCnt + padding * 2 - 4));
 	Me.frame:SetPos(Me.Settings.xPos, Me.Settings.yPos);
 	
 	-- Check
@@ -296,17 +305,8 @@ function Me.InitialFrame()
 		--Nasiko:Log(v.ClassName);
 		--Nasiko:Log(v.Name);
 		
-		if cnt == 0 then
-			xPos = w * cnt + padding + margin;
-		else
-			xPos = w * cnt + padding;
-		end
-		
-		if nowRow == 0 then
-			yPos = h * nowRow + padding + margin;
-		else
-			yPos = h * nowRow + padding;
-		end
+		xPos = w * cnt + padding;
+		yPos = h * nowRow + padding;
 		
 		local baseSlot = Me.frame:CreateOrGetControl("slot", "slot"..v.ClassID, xPos, yPos, soltWitch, soltHeight);
 		tolua.cast(baseSlot, 'ui::CSlot');
@@ -346,17 +346,8 @@ function Me.InitialFrame()
 				--Nasiko:Log(subv.ClassName);
 				--Nasiko:Log(subv.Name);
 				
-				if cnt == 0 then
-					xPos = w * cnt + padding + margin;
-				else
-					xPos = w * cnt + padding;
-				end
-		
-				if nowRow == 0 then
-					yPos = h * nowRow + padding + margin;
-				else
-					yPos = h * nowRow + padding;
-				end
+				xPos = w * cnt + padding;
+				yPos = h * nowRow + padding;
 				
 				baseSlot = Me.frame:CreateOrGetControl("slot", "slot"..v.ClassID..subv.ClassID, xPos, yPos, soltWitch, soltHeight);
 				tolua.cast(baseSlot, 'ui::CSlot');
