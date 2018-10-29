@@ -12,13 +12,9 @@
 
 ## 可用命令(Command)
 
-    /spend itemcraft on
+**/spend itemcraft on**: Display item of craft.
 
-Display item of craft.
-
-    /spend itemcraft off
-
-Hide item of craft.
+**/spend itemcraft off**: Hide item of craft.
 
 ## 範例(Example)
 
