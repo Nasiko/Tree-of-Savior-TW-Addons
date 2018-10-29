@@ -1,9 +1,14 @@
 # Skill Spend Item
 
     Displays the remaining amount of items needed for all kinds of skills 
-    including regular skills, crafting skills, and Squire’s base camp/food table skill.
-    regular skills of spend item information form client database.
-    other skills of spend item information form  Manual maintenance information for developer.
+    including regular skills, crafting skills, shop skills, and Squire’s base camp/food table skill.
+    ※Regular skills information from TOS client database.
+    ※Other skills information from Manual maintenance for developer.
+    
+    顯示發動技能所需要物品的剩餘數
+    包含常規技能、製作技能、擺攤技能和侍從的帳篷/餐桌技能
+    ※常規技能的資訊來自於遊戲客戶端資料庫
+    ※其他技能是由開發者自行維護
 
 ## 可用命令(Command)
 
