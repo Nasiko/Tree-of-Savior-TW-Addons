@@ -34,7 +34,7 @@
 		"fileVersion" : "v1.0.1",
 		"releaseTag" : "skillspenditem",
 		"unicode" : "⛄",
-		"description" : "The remaining number of items required to the skill. 顯示技能所需要的物品剩餘數量。",
+		"description" : "Displays the remaining amount of items needed for all kinds of skills including regular skills, crafting skills, and Squire’s base camp/food table skill. 顯示發動技能所需要物品的剩餘數，包含常規、製作物品、開店、露營及餐桌技能。",
 		"tags" : [
 			"skill",
 			"spenditem",
