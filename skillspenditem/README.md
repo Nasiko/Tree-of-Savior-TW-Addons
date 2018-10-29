@@ -1,6 +1,9 @@
 # Skill Spend Item
 
-The remaining number of items required to the skill
+    Displays the remaining amount of items needed for all kinds of skills 
+    including regular skills, crafting skills, and Squire’s base camp/food table skill.
+    regular skills of spend item information form client database.
+    other skills of spend item information form  Manual maintenance information for developer.
 
 ## 可用命令(Command)
 
