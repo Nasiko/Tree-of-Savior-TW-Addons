@@ -9,7 +9,7 @@
 `v0.9.0 By Nasiko 2018.11.03`
 * bug fix
 * Optimization Addon
-* add command reset, normal, min, on, off
+* add command /dps [reset/normal/min/on/off]
 
 ## 可用命令(Command)
 
