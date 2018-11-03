@@ -10,6 +10,16 @@
     ※常規技能的資訊來自於遊戲客戶端資料庫
     ※其他技能是由開發者自行維護
 
+`v1.0.0 By Nasiko 2018.10.28` 
+* Initial public
+
+`v1.0.1 By Nasiko 2018.10.29`
+* Add Appraiser And Alchemist Skills Spend Item
+
+`v1.0.2 By Nasiko 2018.11.3`
+* Add Bokor Skills Spend Item
+* Item Pass Vis(Silver coin)
+
 ## 可用命令(Command)
 
 **/spend itemcraft on**: Display item of craft.
