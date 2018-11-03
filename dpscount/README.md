@@ -6,7 +6,7 @@
 * bug fix
 * Auto Save Window Locations
 
-`v0.9.0 By Nasiko 2018.10.18`
+`v0.9.0 By Nasiko 2018.11.03`
 * bug fix
 * Optimization Addon
 * add command reset, normal, min, on, off
