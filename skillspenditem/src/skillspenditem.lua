@@ -1,5 +1,5 @@
 local addonName = "SkillSpendItem";
-local verText = "1.0.1";
+local verText = "1.0.2";
 local verSettings = 1;
 local autherName = "NASIKO";
 local addonNameLower = string.lower(addonName);
@@ -23,10 +23,10 @@ Me.ItemCraftList = {};
 
 -- 侍從(Squire)
 Me.SkillList[1011] = {};
-Me.SkillList[1011][10703] = { ClassName = "Squire_Repair", SpendItem = "misc_repairkit_1"};
-Me.SkillList[1011][10709] = { ClassName = "Squire_EquipmentTouchUp", SpendItem = "misc_whetstone"};
-Me.SkillList[1011][10705] = { ClassName = "Squire_Camp", SpendItem = "misc_campkit"};
-Me.SkillList[1011][10706] = { ClassName = "Squire_FoodTable", SpendItem = "misc_campkit"};
+Me.SkillList[1011][10703] = { ClassName = "Squire_Repair", SpendItem = "misc_repairkit_1"}; -- 維修(Repair)
+Me.SkillList[1011][10709] = { ClassName = "Squire_EquipmentTouchUp", SpendItem = "misc_whetstone"}; -- 整修裝備(Equipment Maintenance)
+Me.SkillList[1011][10705] = { ClassName = "Squire_Camp", SpendItem = "misc_campkit"}; -- 設置營地(Base Camp)
+Me.SkillList[1011][10706] = { ClassName = "Squire_FoodTable", SpendItem = "misc_campkit"}; -- 設置餐台(Food Table)
 
 
 Me.ItemCraftList[1011] = {};
@@ -41,8 +41,8 @@ Me.ItemCraftList[1011][1].Items[7] = { ClassName = "food_040", Cnt = 0 }; -- 蔥
 
 -- 鍊金(Alchemist)
 Me.SkillList[2005] = {};
-Me.SkillList[2005][21003] = { ClassName = "Alchemist_Roasting", SpendItem = "misc_catalyst_1"}; -- 寶石烘培
-Me.SkillList[2005][21007] = { ClassName = "Alchemist_ItemAwakening", SpendItem = "misc_wakepowder"}; -- 道具覺醒
+Me.SkillList[2005][21003] = { ClassName = "Alchemist_Roasting", SpendItem = "misc_catalyst_1"}; -- 寶石烘培(Gem Roasting)
+Me.SkillList[2005][21007] = { ClassName = "Alchemist_ItemAwakening", SpendItem = "misc_wakepowder"}; -- 道具覺醒(Item Awakening)
 
 Me.ItemCraftList[2005] = {};
 Me.ItemCraftList[2005][1] = { TargetItem = "Drug_Alche_HP",	Items = {}, Cnt = 5 };
@@ -84,7 +84,11 @@ Me.ItemCraftList[3011][6].Items[2] = { ClassName = "misc_0116", Cnt = 10 };
 
 -- 鑑定師(Appraiser)
 Me.SkillList[3013] = {};
-Me.SkillList[3013][31501] = { ClassName = "Appraiser_Apprise", SpendItem = "misc_0507"}; -- 鑑定
+Me.SkillList[3013][31501] = { ClassName = "Appraiser_Apprise", SpendItem = "misc_0507"}; -- 鑑定(Apprise)
+
+-- 邪靈祭司(Bokor)
+Me.SkillList[4004] = {};
+Me.SkillList[4004][40304] = { ClassName = "Bokor_Zombify", SpendItem = "Zombie_Capsule"}; -- 製造殭屍(Zombify)
 
 -- 寬恕(Pardoner)
 Me.ItemCraftList[4010] = {};
@@ -174,7 +178,7 @@ function Me.GetSkillSpendItem()
 				local skl = skillList:GetSkillByName(cls.SkillName)
 				if skl ~= nil then
 					objSkill = GetIES(skl:GetObject());	
-					if objSkill.SpendItem ~= nil and objSkill.SpendItem ~= "" and objSkill.SpendItem ~= "None" then
+					if objSkill.SpendItem ~= nil and objSkill.SpendItem ~= "" and objSkill.SpendItem ~= "None" and objSkill.SpendItem ~= "Vis" then
 						local SpendItemInfo = GetClass("Item", objSkill.SpendItem);
 						if SpendItemInfo ~= nil then
 							if Me.SpendItemTable[SpendItemInfo.ClassID] == nil then
