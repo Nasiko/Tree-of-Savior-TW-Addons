@@ -6,7 +6,29 @@
 * bug fix
 * Auto Save Window Locations
 
-![alt text](https://i.imgur.com/Ih0oFoj.png)
+`v0.9.0 By Nasiko 2018.10.18`
+* bug fix
+* Optimization Addon
+* add command reset, normal, min, on, off
+
+## 可用命令(Command)
+
+**/dps reset**: Reset DPS Count.
+
+**/dps min**: DPS Count Windows Minimum.
+
+**/dps normal**: DPS Count Windows Normal.
+
+**/dps on**: DPS Count Enabled.
+
+**/dps off**: DPS Count Disabled.
+
+## 注意事項(Precautions)
+
+**Windows Normal/Minimum**
+
+![Normal](https://i.imgur.com/Wo0FU7Q.png)
+![Minimum](https://i.imgur.com/oXYdhP6.png)
 
 **Please, Chat Settings → Damage → Damage dealt Checked!**
 
