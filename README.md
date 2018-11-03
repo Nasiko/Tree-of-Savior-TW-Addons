@@ -5,7 +5,7 @@
 * [Item Craft Optimization](#item-craft-optimization)
 * [Skill Spend Item](#skill-spend-item)
 ***
-# DPS Count
+## DPS Count
 `v0.1.1 Beta By Nasiko 2018.10.10` 
 * Initial public
 
@@ -13,7 +13,29 @@
 * bug fix
 * Auto Save Window Locations
 
-![alt text](https://i.imgur.com/Ih0oFoj.png)
+`v0.9.0 By Nasiko 2018.11.03`
+* bug fix
+* Optimization Addon
+* add command reset, normal, min, on, off
+
+### 可用命令(Command)
+
+**/dps reset**: Reset DPS Count.
+
+**/dps min**: DPS Count Windows Minimum.
+
+**/dps normal**: DPS Count Windows Normal.
+
+**/dps on**: DPS Count Enabled.
+
+**/dps off**: DPS Count Disabled.
+
+### 注意事項(Precautions)
+
+**Windows Normal/Minimum**
+
+![Normal](https://i.imgur.com/Wo0FU7Q.png)
+![Minimum](https://i.imgur.com/oXYdhP6.png)
 
 **Please, Chat Settings → Damage → Damage dealt Checked!**
 
@@ -27,7 +49,7 @@
 
 ![alt text](https://i.imgur.com/rAgGaOx.png)
 
-# Item Craft Optimization
+## Item Craft Optimization
 優化使用技能製作道具介面，可以直接點擊材料製作。
 
 **Fletcher Of Craft Arrow**
@@ -42,7 +64,7 @@
 
 ![Item Craft screenshot](http://i.imgur.com/hhqFla0.png)
 
-# Skill Spend Item
+## Skill Spend Item
 
     Displays the remaining amount of items needed for all kinds of skills 
     including regular skills, crafting skills, shop skills, and Squire’s base camp/food table skill.
@@ -64,13 +86,13 @@
 * Add Bokor Skills Spend Item
 * Item Pass Vis(Silver coin)
 
-## 可用命令(Command)
+### 可用命令(Command)
 
 **/spend itemcraft on**: Display item of craft.
 
 **/spend itemcraft off**: Hide item of craft.
 
-## 範例(Example)
+### 範例(Example)
 
 侍從(Squire)
 
