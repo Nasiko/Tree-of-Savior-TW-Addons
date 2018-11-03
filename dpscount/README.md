@@ -11,7 +11,7 @@
 * Optimization Addon
 * add command reset, normal, min, on, off
 
-## 可用命令(Command)
+### 可用命令(Command)
 
 **/dps reset**: Reset DPS Count.
 
@@ -23,7 +23,7 @@
 
 **/dps off**: DPS Count Disabled.
 
-## 注意事項(Precautions)
+### 注意事項(Precautions)
 
 **Windows Normal/Minimum**
 
