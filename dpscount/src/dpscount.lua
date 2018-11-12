@@ -229,6 +229,7 @@ function NASIKO_DPSCOUNT_ON_GAME_START_3SEC()
 		Me.Loaded = true;
 		LoadSetting();
 	else
+		Me.IsCount = false;
 		Me.IsReset = true;
 	end
 
